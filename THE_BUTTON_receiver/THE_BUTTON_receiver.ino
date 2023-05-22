@@ -14,6 +14,9 @@ unsigned short int LED_CONNECTED_PIN = 13;
 const char SSID[] = "WIFI-SSID";
 const char PW[] = "WIFI-PASSWORD";
 
+//Port to connect to
+unsigned short int port = 60221;
+
 void setup() {
   // put your setup code here, to run once:
 
@@ -40,7 +43,7 @@ void setup() {
   Serial.println((WiFi.localIP()));
 
   server.begin();
-  Udp.begin(60221);
+  Udp.begin(port);
 }
 
 void loop() {

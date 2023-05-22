@@ -19,6 +19,9 @@ const char PW[] = "WIFI-PASSWORD";
 const int LED_PIN_ERROR = 5;
 const int LED_PIN_GOOD = 18;
 
+//Port to connect to
+unsigned short int port = 60221;
+
 //IP address of the receiver. Run the receiver code and it will give you 
 //  its IP addresss. Put it in here.
 IPAddress receiver_ip(192, 168, 0, 1);
@@ -51,7 +54,7 @@ void setup() {
   Serial.println((WiFi.localIP()));
 
   //Check if connection to receiver was successful
-  connected = cli.connect(receiver_ip, 60221);
+  connected = cli.connect(receiver_ip, port);
 
   if (connected){
     Serial.println("Connected to receiver");
@@ -83,7 +86,7 @@ void loop() {
 
 //Send single UDP packet. Return 0 if success, else return -1.
 signed short int send_packet(){
-  if (Udp.beginPacket(receiver_ip, 60221) == 1){
+  if (Udp.beginPacket(receiver_ip, port) == 1){
     Udp.write(1);
     Udp.endPacket();
     return 0;
