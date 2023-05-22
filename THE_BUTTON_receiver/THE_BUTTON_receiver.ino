@@ -11,8 +11,8 @@ WiFiUDP Udp;
 unsigned short int LED_CONNECTED_PIN = 13;
 
 //Wifi SSID and password
-const char SSID[] = "Irizarry";
-const char PW[] = "Extr@cto700";
+const char SSID[] = "WIFI-SSID";
+const char PW[] = "WIFI-PASSWORD";
 
 void setup() {
   // put your setup code here, to run once:
@@ -56,7 +56,6 @@ void loop() {
     }
   } 
   check_port();
-
 }
 
 void check_port(){

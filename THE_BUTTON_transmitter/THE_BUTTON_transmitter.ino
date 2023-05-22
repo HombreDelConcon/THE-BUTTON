@@ -12,18 +12,16 @@ WiFiUDP Udp;
 bool connected;
 
 //SSID and password of the internet
-const char SSID[] = "Irizarry";
-const char PW[] = "Extr@cto700";
+const char SSID[] = "WIFI-SSID";
+const char PW[] = "WIFI-PASSWORD";
 
 //LED pin
 const int LED_PIN_ERROR = 5;
 const int LED_PIN_GOOD = 18;
 
-//Packet buffer
-char buffer[] = "chase it";
-
-//IP address of the receiver
-IPAddress receiver_ip(192, 168, 40, 108);
+//IP address of the receiver. Run the receiver code and it will give you 
+//  its IP addresss. Put it in here.
+IPAddress receiver_ip(192, 168, 0, 1);
 
 void setup() {
   // put your setup code here, to run once:
@@ -68,6 +66,9 @@ void loop() {
   if (inp < 5){
     int attempt_counter = 0;
     Serial.println("Sending request");
+
+    //If packet was successfully sent then turn on LED, if
+    //  error then turn on other LED. 
     if (send_packet() < 0){
       digitalWrite(LED_PIN_ERROR, HIGH);
       delay(4000);
@@ -80,6 +81,7 @@ void loop() {
   }
 }
 
+//Send single UDP packet. Return 0 if success, else return -1.
 signed short int send_packet(){
   if (Udp.beginPacket(receiver_ip, 60221) == 1){
     Udp.write(1);
